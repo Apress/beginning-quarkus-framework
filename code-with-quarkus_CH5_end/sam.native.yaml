@@ -1,0 +1,23 @@
+  AWSTemplateFormatVersion: '2010-09-09'
+  Transform: AWS::Serverless-2016-10-31
+  Description: AWS Serverless Quarkus HTTP - com.apress::lambda
+  Globals:
+    Api:
+      BinaryMediaTypes:
+        - "*/*"
+
+  Resources:
+    LambdaNativeFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: not.needed.for.provided.runtime
+        Runtime: provided
+        CodeUri: target/function.zip
+        MemorySize: 128
+        Policies: AWSLambdaBasicExecutionRole
+        Timeout: 15
+        ProvisionedConcurrencyConfig:
+          ProvisionedConcurrentExecutions: 5
+        Environment:
+          Variables:
+            DISABLE_SIGNAL_HANDLERS: true

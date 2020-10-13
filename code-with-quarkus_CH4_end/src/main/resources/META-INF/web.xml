@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This web.xml file is not required when using Servlet 3.0 container, 
+	see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
+<web-app version="4.0"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+
+     <!-- enable the Asynchronous Job Service -->
+     <context-param>
+        <param-name>resteasy.async.job.service.enabled</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!-- The next context parameters are all optional.  
+         Their default values are shown as example param-values -->
+
+    <!-- How many jobs results can be held in memory at once? -->
+    <context-param>
+        <param-name>resteasy.async.job.service.max.job.results</param-name>
+        <param-value>100</param-value>
+    </context-param>
+
+    <!-- Maximum wait time on a job when a client is querying for it -->
+    <context-param>
+        <param-name>resteasy.async.job.service.max.wait</param-name>
+        <param-value>300000</param-value>
+    </context-param>
+
+    <!-- Thread pool size of background threads that run the job -->
+    <context-param>
+        <param-name>resteasy.async.job.service.thread.pool.size</param-name>
+        <param-value>100</param-value>
+    </context-param>
+
+    <!-- Set the base path for the Job uris -->
+    <context-param>
+        <param-name>resteasy.async.job.service.base.path</param-name>
+        <param-value>/async/jobs</param-value>
+    </context-param>
+</web-app>
